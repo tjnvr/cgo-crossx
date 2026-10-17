@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# Run inside ghcr.io/goreleaser/goreleaser-cross, which provides the cross C toolchains.
+version: 2
+project_name: go-cross
+builds:
+  - id: linux-amd64
+    main: .
+    goos: [linux]
+    goarch: [amd64]
+    flags: [-a]
+    env:
+      - CGO_ENABLED=1
+      - CC=x86_64-linux-gnu-gcc
+      - CXX=x86_64-linux-gnu-g++
+  - id: linux-arm64
+    main: .
+    goos: [linux]
+    goarch: [arm64]
+    flags: [-a]
+    env:
+      - CGO_ENABLED=1
+      - CC=aarch64-linux-gnu-gcc
+      - CXX=aarch64-linux-gnu-g++
